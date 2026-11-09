@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dovet Rise</title>
+<meta name="description" content="Dovet disability support. You rise, we believe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Allura&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#C96F56;
+  --terracotta-ink:#A4513A;
+  --coral:#E7A28F;
+  --blush:#F1C7B5;
+  --sage:#A7B89A;
+  --sage-ink:#566B4B;
+  --blue:#6B8CA3;
+  --navy:#3F4E66;
+  --night:#2E3A4F;
+  --cream:#FDF6ED;
+  --sand:#F6E8DA;
+  --ink:#2F3A4C;
+  --gutter:clamp(16px,4vw,56px);
+  --max:1320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:"Gabarito",system-ui,sans-serif;font-size:1.125rem;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--cream);color:var(--navy);padding:10px 16px;border-radius:10px;z-index:200;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.script{font-family:"Allura",cursive;font-weight:400;line-height:1}
+h1,h2,h3{font-weight:700;line-height:1;letter-spacing:-.025em}
+h2{font-size:clamp(2.4rem,6vw,5rem);color:var(--navy);text-wrap:balance}
+
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:1em 1.8em;border-radius:999px;font:inherit;font-weight:600;text-decoration:none;border:0;cursor:pointer;transition:background-color .25s,color .25s}
+.btn-coral{background:var(--coral);color:var(--night)}
+.btn-coral:hover{background:var(--cream)}
+.btn-line{color:var(--cream);box-shadow:inset 0 0 0 1.5px rgba(253,246,237,.6)}
+.btn-line:hover{background:var(--cream);color:var(--navy)}
+.btn-navy{background:var(--navy);color:var(--cream)}
+.btn-navy:hover{background:var(--terracotta-ink)}
+
+/* header + full-screen menu */
+.site-header{position:fixed;inset:0 0 auto;z-index:60;transition:background-color .4s,box-shadow .4s}
+.site-header.light{background:rgba(253,246,237,.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(63,78,102,.08)}
+body.menu-open .site-header{background:transparent;box-shadow:none;backdrop-filter:none}
+.site-header .wrap{display:flex;justify-content:space-between;align-items:center;height:84px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream);transition:color .4s}
+.brand svg{width:44px}
+.brand b{font-weight:700;letter-spacing:.16em;font-size:1.2rem}
+.site-header.light .brand,.site-header.light .menu-toggle{color:var(--navy)}
+.head-r{display:flex;gap:10px;align-items:center}
+.menu-toggle{display:flex;align-items:center;gap:12px;background:none;border:0;color:var(--cream);font:inherit;font-weight:600;cursor:pointer;padding:10px 4px;transition:color .4s}
+.menu-toggle .lines{width:28px;height:12px;position:relative}
+.menu-toggle .lines i{position:absolute;left:0;right:0;height:2px;background:currentColor;border-radius:2px;transition:transform .4s,top .4s}
+.menu-toggle .lines i:first-child{top:0}.menu-toggle .lines i:last-child{top:10px}
+body.menu-open .menu-toggle .lines i:first-child{top:5px;transform:rotate(45deg)}
+body.menu-open .menu-toggle .lines i:last-child{top:5px;transform:rotate(-45deg)}
+body.menu-open .site-header .brand,body.menu-open .menu-toggle{color:var(--cream)}
+.overlay{position:fixed;inset:0;z-index:55;background:var(--navy);color:var(--cream);clip-path:circle(0% at calc(100% - 60px) 42px);transition:clip-path .8s cubic-bezier(.7,0,.2,1);display:grid;align-items:center;visibility:hidden}
+body.menu-open .overlay{clip-path:circle(150% at calc(100% - 60px) 42px);visibility:visible}
+.overlay .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;width:100%}
+.overlay ul{list-style:none}
+.overlay li{overflow:hidden}
+.overlay ul a{display:inline-block;font-size:clamp(2.4rem,6vw,4.6rem);font-weight:700;line-height:1.15;text-decoration:none;transform:translateY(105%);transition:transform .7s cubic-bezier(.2,.9,.2,1),color .2s}
+body.menu-open .overlay ul a{transform:none}
+.overlay li:nth-child(2) a{transition-delay:.05s}.overlay li:nth-child(3) a{transition-delay:.1s}.overlay li:nth-child(4) a{transition-delay:.15s}.overlay li:nth-child(5) a{transition-delay:.2s}
+.overlay ul a:hover{color:var(--coral)}
+.overlay aside{align-self:end;display:grid;gap:10px;font-size:1.1rem}
+.overlay aside a{text-decoration:none}
+.overlay .script{font-size:3.4rem;color:var(--blush);margin-bottom:12px}
+@media (max-width:760px){.overlay .wrap{grid-template-columns:1fr}.head-r .btn{display:none}}
+
+/* hero: dawn horizon, the photo is the sun */
+.hero{position:relative;height:200vh;background:linear-gradient(180deg,var(--night) 0%,var(--navy) 35%,#7E7F8E 62%,#D9A08C 82%,var(--blush) 100%)}
+.hero-stick{position:sticky;top:0;height:100svh;overflow:hidden}
+.hero h1{position:absolute;left:var(--gutter);right:var(--gutter);top:clamp(110px,16vh,170px);color:var(--cream);font-size:clamp(3.4rem,11.5vw,11rem);line-height:.88;z-index:3}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:inline-block}
+.hero h1 .ln:nth-child(2){padding-left:12vw}
+.hero h1 .rise-word{color:var(--coral)}
+.hero h1 .rise-word span{display:inline-block}
+.sun{position:absolute;left:50%;bottom:-22vmin;width:min(68vmin,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;overflow:hidden;z-index:1;box-shadow:0 0 0 18px rgba(241,199,181,.18),0 0 0 44px rgba(241,199,181,.1),0 0 160px 40px rgba(231,162,143,.5)}
+.sun img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.hills{position:absolute;left:0;right:0;bottom:-1px;z-index:2;width:100%;height:auto}
+.hero-foot{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(24px,5vh,48px);z-index:3;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;color:var(--navy)}
+.hero-foot p{max-width:24em;font-size:1.1rem;font-weight:500}
+.hero-foot .acts{display:flex;gap:10px;flex-wrap:wrap}
+.hero-foot .btn-line{color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)}
+.hero-foot .btn-line:hover{background:var(--navy);color:var(--cream)}
+@media (max-width:700px){.hero-foot p{display:none}.hero h1{font-size:17vw}.sun{width:86vw}}
+
+/* altitude meter: a little dove climbs as you read */
+.altitude{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);height:42vh;width:24px;z-index:40;pointer-events:none}
+.altitude::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(to bottom,rgba(107,140,163,.5) 0 4px,transparent 4px 9px)}
+.altitude svg{position:absolute;left:-6px;bottom:0;width:36px;transform:translateY(50%)}
+@media (max-width:700px){.altitude{display:none}}
+
+/* intro */
+.intro{padding:clamp(100px,14vw,190px) 0 clamp(80px,10vw,130px)}
+.intro-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,6vw,90px);align-items:end}
+.intro h2 .script{display:block;font-size:.95em;color:var(--terracotta);letter-spacing:0;margin-top:.12em;font-weight:400}
+.intro p{font-size:1.2rem;max-width:30em}
+.intro p+p{margin-top:16px}
+.intro .btn{margin-top:28px}
+@media (max-width:860px){.intro-grid{grid-template-columns:1fr}}
+
+/* stacked pillars */
+.stack{padding:0 var(--gutter) clamp(60px,8vw,100px)}
+.stack-head{max-width:var(--max);margin:0 auto 40px;padding:0 var(--gutter)}
+.pillar{position:sticky;top:110px;max-width:var(--max);margin:0 auto 24px;min-height:min(560px,72vh);border-radius:40px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 -20px 50px -30px rgba(46,58,79,.35);transform-origin:center top}
+.pillar .txt{padding:clamp(30px,5vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+.pillar .ic{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:rgba(253,246,237,.3)}
+.pillar .ic svg{width:40px;height:40px}
+.pillar h3{font-size:clamp(2rem,4vw,3.4rem)}
+.pillar p{font-size:1.2rem;max-width:24em;margin-top:14px}
+.pillar figure{position:relative;overflow:hidden}
+.pillar figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pillar.t{background:var(--terracotta);color:var(--cream)}
+.pillar.s{background:var(--sage);color:var(--night)}
+.pillar.b{background:var(--blue);color:var(--cream)}
+.pillar.c{background:var(--coral);color:var(--night)}
+.pillar.n{background:var(--navy);color:var(--cream)}
+@media (max-width:820px){.pillar{grid-template-columns:1fr;position:relative;top:0;min-height:0}.pillar figure{height:260px;order:-1}}
+
+/* services */
+.services{padding:clamp(80px,10vw,130px) 0}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:50px;border-top:1.5px solid var(--navy)}
+.svc{position:relative;padding:34px 28px 40px 0;border-bottom:1.5px solid rgba(63,78,102,.2);min-height:250px;display:flex;flex-direction:column;gap:12px;isolation:isolate}
+.svc:not(:nth-child(3n+1)){padding-left:28px;border-left:1.5px solid rgba(63,78,102,.2)}
+.svc h3{font-size:1.6rem;color:var(--navy)}
+.svc p{max-width:22em}
+.svc .bg{position:absolute;inset:0;z-index:-1;clip-path:circle(0% at var(--mx,50%) var(--my,50%));transition:clip-path .6s cubic-bezier(.2,.8,.2,1)}
+.svc .bg img{width:100%;height:100%;object-fit:cover}
+.svc .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(46,58,79,.35),rgba(46,58,79,.82))}
+.svc:hover .bg{clip-path:circle(150% at var(--mx,50%) var(--my,50%))}
+.svc:hover h3,.svc:hover p{color:var(--cream)}
+.svc h3,.svc p{transition:color .3s}
+.svc:hover{padding-left:28px}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}.svc:nth-child(n){padding-left:20px;border-left:0}.svc:nth-child(2n){border-left:1.5px solid rgba(63,78,102,.2)}}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}.svc:nth-child(n){border-left:0;padding-left:0;min-height:0}}
+
+/* quote marquee */
+.quotes{padding:clamp(60px,8vw,100px) 0;overflow:hidden}
+.q-row{display:flex;gap:28px;width:max-content;will-change:transform}
+.q{width:min(80vw,520px);background:var(--sand);border-radius:32px;padding:34px;flex-shrink:0}
+.q p{font-size:1.35rem;line-height:1.4;color:var(--navy);font-weight:500}
+.q footer{margin-top:20px;font-size:1rem;opacity:.8}
+.q:nth-child(3n+2){background:#E3E9DD}
+.q:nth-child(3n){background:#F7DED4}
+
+/* dusk: closing */
+.dusk{background:linear-gradient(180deg,var(--cream) 0%,var(--blush) 9%,#9C8189 24%,var(--navy) 46%,var(--night) 100%);padding:clamp(160px,20vw,260px) 0 0;color:var(--cream);position:relative;overflow:hidden}
+.dusk .big{font-size:clamp(4rem,14vw,13rem);color:var(--cream);text-align:center;line-height:.9}
+.dusk .lede{text-align:center;max-width:30em;margin:26px auto 0;font-size:1.25rem}
+.dusk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:70px}
+.dusk-cards a{display:block;text-decoration:none;background:rgba(253,246,237,.08);border:1px solid rgba(253,246,237,.18);border-radius:28px;padding:28px;transition:background-color .3s,transform .3s}
+.dusk-cards a:hover{background:rgba(253,246,237,.16);transform:translateY(-4px)}
+.dusk-cards b{display:block;font-size:1.5rem;margin-bottom:6px}
+.dusk-cards span{opacity:.85}
+@media (max-width:820px){.dusk-cards{grid-template-columns:1fr}}
+footer.site{color:var(--cream);padding:70px 0 40px;font-size:.95rem}
+footer.site .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(253,246,237,.18);padding-top:28px}
+footer.site a{text-decoration:none;opacity:.85}
+footer.site ul{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero{height:auto}.hero-stick{position:relative}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 212 176">
+    <path fill="#A7B89A" d="M18 150 C 42 118, 92 112, 122 140 C 92 162, 46 168, 18 150 Z"/>
+    <path fill="#F1C7B5" d="M18 106 C 60 84, 106 104, 122 142 C 88 136, 40 138, 18 106 Z"/>
+    <path fill="#E7A28F" d="M26 60 C 78 50, 118 88, 125 142 C 96 116, 38 104, 26 60 Z"/>
+    <path fill="#C96F56" d="M56 4 C 112 16, 140 80, 124 142 C 98 108, 52 70, 56 4 Z"/>
+    <path fill="#DE8F78" d="M118 142 C 128 104, 136 72, 156 58 C 164 52, 174 54, 178 60 L 190 62 L 178 68 C 166 74, 160 92, 150 112 C 142 128, 132 138, 118 142 Z"/>
+    <g fill="#8FA383"><path d="M186 64 C 190 50, 194 40, 198 30" stroke="#8FA383" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M190 52 C 182 48, 178 40, 180 34 C 188 38, 191 45, 190 52 Z"/><path d="M193 44 C 200 42, 205 36, 204 30 C 197 31, 193 38, 193 44 Z"/><path d="M196 36 C 191 30, 191 22, 195 18 C 199 24, 199 31, 196 36 Z"/></g>
+  </symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Dovet home"><svg viewBox="0 0 212 176" aria-hidden="true"><use href="#mark"/></svg><b>DOVET</b></a>
+    <div class="head-r">
+      <a class="btn btn-coral" href="tel:1300000000">1300 000 000</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="overlay"><span class="lbl">Menu</span><span class="lines" aria-hidden="true"><i></i><i></i></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="wrap">
+    <nav aria-label="Main"><ul>
+      <li><a href="#why">Why Dovet</a></li>
+      <li><a href="#values">What we stand for</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#contact">Get in touch</a></li>
+    </ul></nav>
+    <aside>
+      <span class="script">More than care.</span>
+      <a href="tel:1300000000">1300 000 000</a>
+      <a href="mailto:hello@dovet.com.au">hello@dovet.com.au</a>
+      <span style="opacity:.7">Monday to Friday, 8am to 6pm</span>
+    </aside>
+  </div>
+</div>
+
+<div class="altitude" aria-hidden="true"><svg viewBox="0 0 212 176"><use href="#mark"/></svg></div>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-stick">
+      <h1 id="hero-title" aria-label="Helping you rise.">
+        <span class="ln" aria-hidden="true"><span>Helping</span></span>
+        <span class="ln" aria-hidden="true"><span>you <em class="rise-word" style="font-style:normal"><span>r</span><span>i</span><span>s</span><span>e</span><span>.</span></em></span></span>
+      </h1>
+      <div class="sun"><img src="../assets/img/rise.jpg" alt="A young man in a wheelchair raising both arms in celebration"></div>
+      <svg class="hills" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#A7B89A" opacity=".55" d="M0 150 C 220 70, 420 70, 640 130 S 1100 210, 1440 90 V260 H0Z"/>
+        <path fill="#F6E8DA" d="M0 200 C 300 140, 520 170, 760 200 S 1200 230, 1440 170 V260 H0Z"/>
+        <path fill="#FDF6ED" d="M0 236 C 360 210, 900 250, 1440 222 V260 H0Z"/>
+      </svg>
+      <div class="hero-foot">
+        <p>Disability support workers who believe in what you can do, and help you do more of it.</p>
+        <div class="acts"><a class="btn btn-navy" href="#contact">Get support</a><a class="btn btn-line" href="#why">How we work</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" id="why" aria-labelledby="intro-title">
+    <div class="wrap intro-grid">
+      <h2 id="intro-title">Support that lifts you up, never holds you back. <span class="script">Supporting brighter tomorrows, together.</span></h2>
+      <div>
+        <p>Most days, good support is quiet. It's a worker who knows your routine, notices when you're tired and celebrates when you nail something new.</p>
+        <p>That's what we train for. Small, consistent teams around each person, and a promise to keep stepping back as you step up.</p>
+        <a class="btn btn-navy" href="#contact">Meet the team near you</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="values" aria-labelledby="values-title">
+    <div class="stack-head"><h2 id="values-title">Five things you can count on</h2></div>
+    <div class="stack">
+      <article class="pillar t"><div class="txt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><div><h3>Person-centred support</h3><p>You set the goals and the pace. We bring the skills, the patience and the follow-through.</p></div></div><figure><img src="../assets/img/support.jpg" alt="A smiling support worker with two people at a table"></figure></article>
+      <article class="pillar s"><div class="txt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="2.6"/><circle cx="5.5" cy="9.5" r="2"/><circle cx="18.5" cy="9.5" r="2"/><path d="M7.5 19v-2a4.5 4.5 0 0 1 9 0v2M2.5 18.5v-1a3 3 0 0 1 4-2.8M21.5 18.5v-1a3 3 0 0 0-4-2.8"/></svg></span><div><h3>Inclusive communities</h3><p>Footy on Saturday, the café on Tuesday. Your support gets you out among people who know your name.</p></div></div><figure><img src="../assets/img/outing.jpg" alt="Friends enjoying a sunny waterfront, one using a wheelchair"></figure></article>
+      <article class="pillar b"><div class="txt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9M12 12c0-4 3-6 7-6 0 4-3 6-7 6zM12 15c0-3-2.4-5-6-5 0 3 2.4 5 6 5z"/></svg></span><div><h3>Greater independence</h3><p>Cooking, travel, budgeting, work. We teach by doing, then step back so you can own it.</p></div></div><figure><img src="../assets/img/cooking.jpg" alt="A woman in a wheelchair slicing an avocado in her kitchen"></figure></article>
+      <article class="pillar c"><div class="txt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg></span><div><h3>Brighter tomorrows</h3><p>Regular check-ins on your goals, so progress is something you can see and feel.</p></div></div><figure><img src="../assets/img/cafe.jpg" alt="A woman enjoying dessert at an outdoor café"></figure></article>
+      <article class="pillar n"><div class="txt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div><h3>You rise, we believe</h3><p>We see ability first. When you're ready to try something new, we're already in your corner.</p></div></div><figure><img src="../assets/img/independence.jpg" alt="A young man with Down syndrome concentrating on his laptop"></figure></article>
+    </div>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="svc-title">
+    <div class="wrap">
+      <h2 id="svc-title">Our services</h2>
+      <div class="svc-grid">
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/home.jpg" alt=""></div><h3>Daily living</h3><p>Personal care, meals and routines, done with dignity and your way.</p></div>
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/park.jpg" alt=""></div><h3>Community access</h3><p>Get out, join in and do more of what you love.</p></div>
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/kitchen.jpg" alt=""></div><h3>Supported independent living</h3><p>Homes with the right support, around the clock.</p></div>
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/cooking.jpg" alt=""></div><h3>Life skills</h3><p>Cooking, budgeting, travel training and job readiness.</p></div>
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/outing.jpg" alt=""></div><h3>Respite</h3><p>A change of scene for you, a breather for your family.</p></div>
+        <div class="svc"><div class="bg" aria-hidden="true"><img src="../assets/img/walk.jpg" alt=""></div><h3>Transport</h3><p>To appointments, work and everywhere in between.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quotes" id="stories" aria-labelledby="q-title">
+    <div class="wrap"><h2 id="q-title" style="margin-bottom:40px">Heard from the people we support</h2></div>
+    <div class="q-row" id="qRow">
+      <figure class="q"><p>“I catch the train to work on my own now. My worker practised the trip with me twelve times.”</p><footer>Liam, participant</footer></figure>
+      <figure class="q"><p>“They read Dad's plan before they arrived. That small thing changed everything for us.”</p><footer>Maria, daughter and carer</footer></figure>
+      <figure class="q"><p>“Same-day replies and progress notes I can actually use. Easy to refer to.”</p><footer>Priya, support coordinator</footer></figure>
+      <figure class="q"><p>“I picked my team. Thursdays we cook, Saturdays we hit the markets.”</p><footer>Jess, participant</footer></figure>
+      <figure class="q"><p>“Best job I've had. I get to see real progress, week after week.”</p><footer>Tom, Dovet support worker</footer></figure>
+    </div>
+  </section>
+
+  <section class="dusk" id="contact" aria-labelledby="dusk-title">
+    <div class="wrap">
+      <h2 id="dusk-title" class="script big">You rise, we believe.</h2>
+      <p class="lede">Ready when you are. Choose how you'd like to start.</p>
+      <div class="dusk-cards">
+        <a href="tel:1300000000"><b>Call us</b><span>1300 000 000. Talk to a real person, Monday to Friday.</span></a>
+        <a href="mailto:hello@dovet.com.au?subject=Referral"><b>Make a referral</b><span>For support coordinators and plan managers. We reply within one business day.</span></a>
+        <a href="mailto:careers@dovet.com.au"><b>Join our team</b><span>Become a support worker with paid training and flexible hours.</span></a>
+      </div>
+    </div>
+    <footer class="site">
+      <div class="wrap">
+        <a class="brand" href="#top" style="color:var(--cream)"><svg viewBox="0 0 212 176" aria-hidden="true"><use href="#mark"/></svg><b>DOVET</b></a>
+        <ul><li><a href="#top">Accessibility</a></li><li><a href="#top">Privacy</a></li><li><a href="#top">Feedback and complaints</a></li></ul>
+        <span>© 2026 Dovet. Registered NDIS provider.</span>
+      </div>
+    </footer>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const body = document.body;
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.menu-toggle');
+  const overlay = document.getElementById('overlay');
+
+  const setMenu = open => {
+    body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.querySelector('.lbl').textContent = open ? 'Close' : 'Menu';
+    overlay.setAttribute('aria-hidden', !open);
+    if (open) overlay.querySelector('a').focus({ preventScroll: true });
+  };
+  toggle.addEventListener('click', () => setMenu(!body.classList.contains('menu-open')));
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && body.classList.contains('menu-open')) { setMenu(false); toggle.focus(); } });
+
+  // header text turns navy once we leave the dark dawn sky
+  const hero = document.querySelector('.hero');
+  const onScroll = () => header.classList.toggle('light', hero.getBoundingClientRect().bottom < 120);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // services: circle reveal grows from where the pointer enters
+  document.querySelectorAll('.svc').forEach(el => el.addEventListener('pointerenter', e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  if (reduce || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis({ lerp: 0.09 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -40 }); }
+  }));
+
+  // dawn: headline drops in, "rise." lifts letter by letter, the sun climbs a little
+  gsap.timeline({ defaults: { ease: 'power4.out' } })
+    .from('.hero h1 .ln > span', { yPercent: 105, duration: 1.2, stagger: .12 })
+    .from('.rise-word span', { yPercent: 60, opacity: 0, duration: .9, stagger: .07, ease: 'back.out(2)' }, .5)
+    .from('.sun', { yPercent: 40, scale: .85, duration: 2.2, ease: 'power2.out' }, 0)
+    .from('.hero-foot > *', { y: 30, opacity: 0, duration: .9, stagger: .1 }, .8);
+
+  // scroll: the sun (photo) rises over the hills and grows, text parts ways
+  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: 1 } })
+    .to('.sun', { bottom: '18vh', width: 'min(86vmin, 820px)', ease: 'none' }, 0)
+    .to('.hero h1 .ln:first-child', { xPercent: -30, opacity: 0, ease: 'none' }, 0)
+    .to('.hero h1 .ln:nth-child(2)', { xPercent: 30, opacity: 0, ease: 'none' }, 0)
+    .to('.hills', { yPercent: 18, ease: 'none' }, 0);
+
+  // altitude meter: the dove climbs as you go down the page
+  gsap.to('.altitude svg', { bottom: '100%', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .5 } });
+
+  gsap.from('.intro h2', { y: 60, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.intro', start: 'top 75%' } });
+
+  // stacked pillars: each card settles back as the next one slides over it
+  ScrollTrigger.matchMedia({
+    '(min-width: 821px)': () => {
+      const cards = gsap.utils.toArray('.pillar');
+      cards.forEach((c, i) => {
+        if (i === cards.length - 1) return;
+        gsap.fromTo(c, { scale: 1, filter: 'brightness(1)' }, { scale: .92 + i * .01, filter: 'brightness(.85)', ease: 'none',
+          scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 110px', scrub: true } });
+      });
+    }
+  });
+
+  gsap.from('.svc', { y: 50, opacity: 0, duration: .9, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: '.svc-grid', start: 'top 80%' } });
+
+  // quotes drift sideways with scroll
+  gsap.fromTo('#qRow', { x: () => innerWidth * .1 }, { x: () => -(document.getElementById('qRow').scrollWidth - innerWidth * .9), ease: 'none',
+    scrollTrigger: { trigger: '.quotes', start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+
+  gsap.from('.dusk .big', { clipPath: 'inset(0 100% 0 0)', duration: 2, ease: 'power2.inOut', scrollTrigger: { trigger: '.dusk', start: 'top 30%' } });
+  gsap.from('.dusk-cards a', { y: 40, opacity: 0, stagger: .1, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.dusk-cards', start: 'top 85%' } });
+})();
+</script>
+</body>
+</html>

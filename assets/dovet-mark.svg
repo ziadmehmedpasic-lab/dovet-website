@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 176" role="img" aria-label="Dovet dove mark">
+  <!-- sage base leaf -->
+  <path fill="#A7B89A" d="M18 150 C 42 118, 92 112, 122 140 C 92 162, 46 168, 18 150 Z"/>
+  <!-- blush lower wing -->
+  <path fill="#F1C7B5" d="M18 106 C 60 84, 106 104, 122 142 C 88 136, 40 138, 18 106 Z"/>
+  <!-- coral middle wing -->
+  <path fill="#E7A28F" d="M26 60 C 78 50, 118 88, 125 142 C 96 116, 38 104, 26 60 Z"/>
+  <!-- terracotta top wing -->
+  <path fill="#C96F56" d="M56 4 C 112 16, 140 80, 124 142 C 98 108, 52 70, 56 4 Z"/>
+  <!-- dove body and head -->
+  <path fill="#DE8F78" d="M118 142 C 128 104, 136 72, 156 58 C 164 52, 174 54, 178 60 L 190 62 L 178 68 C 166 74, 160 92, 150 112 C 142 128, 132 138, 118 142 Z"/>
+  <!-- olive branch -->
+  <g fill="#8FA383">
+    <path d="M186 64 C 190 50, 194 40, 198 30" stroke="#8FA383" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M190 52 C 182 48, 178 40, 180 34 C 188 38, 191 45, 190 52 Z"/>
+    <path d="M193 44 C 200 42, 205 36, 204 30 C 197 31, 193 38, 193 44 Z"/>
+    <path d="M196 36 C 191 30, 191 22, 195 18 C 199 24, 199 31, 196 36 Z"/>
+  </g>
+</svg>
